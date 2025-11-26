@@ -80,3 +80,31 @@ header h1 {
     border-radius: 5px;
     font-weight: bold;
 }
+
+
+/* 勝ちの色分け: 赤系 */
+.result.win-result {
+    /* 薄い背景色 */
+    background-color: #d9534f22; 
+    /* 濃い枠線と文字色 */
+    border-color: #d9534f;
+    color: #d9534f;
+}
+
+/* 負けの色分け: 緑系 */
+.result.lose-result {
+    /* 薄い背景色 */
+    background-color: #5cb85c22;
+    /* 濃い枠線と文字色 */
+    border-color: #5cb85c;
+    color: #5cb85c;
+}
+
+/* あいこの色分け: 黄色系 */
+.result.draw-result {
+    /* 薄い背景色 */
+    background-color: #f0ad4e22;
+    /* 濃い枠線と文字色 */
+    border-color: #f0ad4e;
+    color: #f0ad4e;
+}

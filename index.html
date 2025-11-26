@@ -52,6 +52,70 @@
 
 // じゃんけんゲームの JavaScript を記述してください！
 
+// HTMLが完全に読み込まれた後に処理を実行するための記述 (jQueryのおまじない)
+$(function () {
+    // ----------------------------------------------------
+    // クリックイベントの設定
+    // ----------------------------------------------------
+    // じゃんけんのボタン（.choice-btnクラスを持つ要素）がクリックされたときの処理
+    $('.choice-btn').on('click', function () {
+        // クリックされたボタンから、プレイヤーの手（ID: "gu", "choki", "pa"）を取得
+        const playerHand = $(this).attr('id');
+
+        // --- コンピュータの手をランダムに決定（関数を使わず直接記述） ---
+        const randNum = Math.floor(Math.random() * 3); // 0, 1, 2 のどれかの整数
+
+        let pcHand;
+        let pcHandText;
+
+        // ランダムな数値に基づき、コンピュータの手を決定
+        if (randNum === 0) {
+            pcHand = "gu";
+            pcHandText = "✊ グー";
+        } else if (randNum === 1) {
+            pcHand = "choki";
+            pcHandText = "✌️ チョキ";
+        } else { // randNum === 2 の場合
+            pcHand = "pa";
+            pcHandText = "✋ パー";
+        }
+
+        // --- コンピュータの手を画面に表示 ---
+        $('#pc-hand').text(pcHandText);
+
+        // --- 勝敗の判定と結果の表示（関数を使わず直接記述） ---
+        const resultElement = $('#result');
+        let resultText = '';
+        let resultClass = '';
+
+        // 以前の色分け用クラスを全て削除
+        resultElement.removeClass('win-result lose-result draw-result');
+
+        // 1. あいこの判定
+        if (playerHand === pcHand) {
+            resultText = 'あいこ';
+            resultClass = 'draw-result';
+        }
+        // 2. プレイヤーの勝ちの判定
+        else if (
+            (playerHand === "gu" && pcHand === "choki") ||   // グーはチョキに勝つ
+            (playerHand === "choki" && pcHand === "pa") ||   // チョキはパーに勝つ
+            (playerHand === "pa" && pcHand === "gu")         // パーはグーに勝つ
+        ) {
+            resultText = '🎉 勝ち！';
+            resultClass = 'win-result';
+        }
+        // 3. それ以外はプレイヤーの負け
+        else {
+            resultText = '残念... 負け';
+            resultClass = 'lose-result';
+        }
+
+        // 最終的な結果を画面に適用
+        resultElement.text(resultText);
+        resultElement.addClass(resultClass);
+    });
+});
 
 </script>
 </body>
